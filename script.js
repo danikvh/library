@@ -4,9 +4,11 @@ let tbodyRef = document.getElementById("myTable").getElementsByTagName("tbody")[
 let popupButton = document.getElementById("popup-button")
 let modal = document.getElementById("myModal")
 let submitButton = document.getElementById("submit-button")
+let cancelButton = document.getElementById("cancel-button")
 
 popupButton.addEventListener("click", showForm)
-window.addEventListener("click", this.closeModal)
+window.addEventListener("click", this.closeModalClick)
+cancelButton.addEventListener("click", closeModal)
 submitButton.addEventListener("click", addBookToLibrary)
 
 
@@ -21,14 +23,14 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary() {
-  const title = document.querySelector("input[name$='title']").value 
-  const author = document.querySelector("input[name$='author']").value
-  const pages = document.querySelector("input[name$='pages']").value
-  const read = document.querySelector("input[name$='read']").checked
-  let book = new Book(title, author, pages, read)
+  const title = document.querySelector("input[name$='title']")
+  const author = document.querySelector("input[name$='author']")
+  const pages = document.querySelector("input[name$='pages']")
+  const read = document.querySelector("input[name$='read']")
+  let book = new Book(title.value, author.value, pages.value, read.checked)
   myLibrary.push(book)
   displayBook(book)
-  modal.style.display = "none";
+  closeModal()
 }
 
 function displayBooks() {
@@ -50,10 +52,23 @@ function showForm() {
   modal.style.display = "block"
 }
 
-function closeModal(event) {
+function closeModal() {
+  modal.style.display = "none";
+  resetForm()
+}
+
+function closeModalClick(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
+  resetForm()
+}
+
+function resetForm() {
+  document.querySelector("input[name$='title']").value = ""
+  document.querySelector("input[name$='author']").value = ""
+  document.querySelector("input[name$='pages']").value = ""
+  document.querySelector("input[name$='read']").checked = false
 }
 
 
