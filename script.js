@@ -14,7 +14,7 @@ function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read === true ? (this.read = "Read") : (this.read = "Not read yet")
+  read === true ? (this.read = "Read") : (this.read = "Not read yet")
   this.info = function() {
     return title + ", " + author + ", " + pages + ", " + read;
   }
@@ -24,7 +24,7 @@ function addBookToLibrary() {
   const title = document.querySelector("input[name$='title']").value 
   const author = document.querySelector("input[name$='author']").value
   const pages = document.querySelector("input[name$='pages']").value
-  let read = document.querySelector("input[name$='read']").checked
+  const read = document.querySelector("input[name$='read']").checked
   let book = new Book(title, author, pages, read)
   myLibrary.push(book)
   displayBook(book)
@@ -57,5 +57,5 @@ function closeModal(event) {
 }
 
 
-myLibrary.push(new Book("The Lord of the Rings","J. R. R. Tolkien", "543", "true"))
+myLibrary.push(new Book("The Lord of the Rings","J. R. R. Tolkien", "543", true))
 displayBooks()
