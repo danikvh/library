@@ -55,6 +55,7 @@ function createRemoveButton(row, book) {
   let removeButton = document.createElement("button")
   removeButton.classList.add("remove-button")
   removeButton.textContent = "Remove Book"
+  removeButton.name = book.title
   removeButton.addEventListener("click", deleteBook)
   let newCell = row.insertCell()
   newCell.appendChild(removeButton)
