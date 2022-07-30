@@ -44,6 +44,7 @@ function displayBook(book) {
   let newRow = tbodyRef.insertRow()
   for (let i = 0; i < 4; i++) {
     let newCell = newRow.insertCell()
+    if (i == 3) createReadCheck(newCell, book)
     let newText = document.createTextNode(Object.values(book)[i])
     newCell.appendChild(newText)
   }
@@ -54,15 +55,31 @@ function createRemoveButton(row, book) {
   let removeButton = document.createElement("button")
   removeButton.classList.add("remove-button")
   removeButton.textContent = "Remove Book"
-  removeButton.name = book.title
   removeButton.addEventListener("click", deleteBook)
   let newCell = row.insertCell()
   newCell.appendChild(removeButton)
 }
 
+function createReadCheck(cell, book) {
+  let readCheck = document.createElement("input")
+  readCheck.setAttribute("type", "checkbox")
+  readCheck.book = book
+  book.read === "Read" ? readCheck.checked = true : readCheck.checked = false
+  readCheck.addEventListener("click", changeReadStatus)
+  cell.appendChild(readCheck)
+}
+
 function deleteBook(evt) {
   const title = evt.currentTarget.name
   myLibrary = myLibrary.filter((book) => book.title !== title)
+  displayBooks()
+}
+
+function changeReadStatus(evt) {
+  const chkBox = evt.currentTarget
+  chkBox.checked === false ? chkBox.book.read = "Not read yet" : chkBox.book.read = "Read"
+  const index = myLibrary.findIndex(book => book.title === chkBox.book.title)
+  myLibrary[index] = chkBox.book
   displayBooks()
 }
 
