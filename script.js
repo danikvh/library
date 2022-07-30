@@ -29,11 +29,12 @@ function addBookToLibrary() {
   const read = document.querySelector("input[name$='read']")
   let book = new Book(title.value, author.value, pages.value, read.checked)
   myLibrary.push(book)
-  displayBook(book)
+  displayBooks()
   closeModal()
 }
 
 function displayBooks() {
+  tbodyRef.innerHTML = ""
   myLibrary.forEach((book) => {
     displayBook(book)
   })
@@ -46,6 +47,23 @@ function displayBook(book) {
     let newText = document.createTextNode(Object.values(book)[i])
     newCell.appendChild(newText)
   }
+  createRemoveButton(newRow, book)
+}
+
+function createRemoveButton(row, book) {
+  let removeButton = document.createElement("button")
+  removeButton.classList.add("remove-button")
+  removeButton.textContent = "Remove Book"
+  removeButton.name = book.title
+  removeButton.addEventListener("click", deleteBook)
+  let newCell = row.insertCell()
+  newCell.appendChild(removeButton)
+}
+
+function deleteBook(evt) {
+  const title = evt.currentTarget.name
+  myLibrary = myLibrary.filter((book) => book.title !== title)
+  displayBooks()
 }
 
 function showForm() {
@@ -61,7 +79,6 @@ function closeModalClick(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-  resetForm()
 }
 
 function resetForm() {
@@ -72,5 +89,6 @@ function resetForm() {
 }
 
 
-myLibrary.push(new Book("The Lord of the Rings","J. R. R. Tolkien", "543", true))
+myLibrary.push(new Book("The Lord of the Rings","J. R. R. Tolkien", "45235", true))
+myLibrary.push(new Book("Dune","Frank Herbert", "1042", false))
 displayBooks()

@@ -6,7 +6,7 @@ table {
 th, td {
     text-align: left;
     padding: 8px;
-  border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 }
 
 .modal {
@@ -51,21 +51,31 @@ th, td {
     margin-top: 20px;
 }
 
-.form-buttons button {
+button {
     background-color: #04AA6D;
     color: white;
-    padding: 16px 20px;
+    padding: 8px 10px;
     border: none;
     cursor: pointer;
-    width: 100%;
-    margin-bottom:10px;
+    width: 150px;
     opacity: 0.8;
+}
+
+button:hover {
+    opacity: 1;
+}
+
+.form-buttons button {
+    padding: 16px 20px;
 }
 
 .form-buttons #cancel-button {
     background-color: red;
 }
 
-.form-buttons button:hover {
-    opacity: 1;
+.remove-button {
+    width: 120px;
+    margin-left: 10px;
+    background-color: red;
+    border-radius: 5px;
 }
