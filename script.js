@@ -11,16 +11,20 @@ window.addEventListener("click", this.closeModalClick)
 cancelButton.addEventListener("click", closeModal)
 submitButton.addEventListener("click", addBookToLibrary)
 
+class Book {
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  read === true ? (this.read = "Read") : (this.read = "Not read yet")
-  this.info = function() {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    read === true ? (this.read = "Read") : (this.read = "Not read yet")
+  }
+
+  info() {
     return title + ", " + author + ", " + pages + ", " + read;
   }
 }
+
 
 function addBookToLibrary() {
   const title = document.querySelector("input[name$='title']")
@@ -109,4 +113,5 @@ function resetForm() {
 
 myLibrary.push(new Book("The Lord of the Rings","J. R. R. Tolkien", "45235", true))
 myLibrary.push(new Book("Dune","Frank Herbert", "1042", false))
+myLibrary.push(new Book("History of Philosophy","Bertrand Russell", "814", true))
 displayBooks()
