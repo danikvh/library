@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="header">
-        <button id="popup-button">NEW BOOK</button>
+        <button type="button" id="popup-button">NEW BOOK</button>
     </div>
     <div class="library">
         <table id="myTable">
@@ -29,7 +29,7 @@
     <div id="myModal" class="modal">
         <form class="form-container">
             <label for="title">Title</label>
-            <input type="text" placeholder="Enter title" name="title" required>
+            <input type="text" placeholder="Enter title" name="title" value="" required>
             <label for="author">Author</label>
             <input type="text" placeholder="Enter author" name="author" required>
             <label for="pages">Number of Pages</label>
@@ -38,7 +38,7 @@
             <input type="checkbox" name="read">
             <div class="form-buttons">
                 <button type="button" id="cancel-button">Cancel</button>
-                <button type="button" id="submit-button">Submit book</button>
+                <button type="submit" id="submit-button">Submit book</button>
             </div>
         </form>
     </div>

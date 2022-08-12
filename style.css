@@ -50,6 +50,10 @@ th, td {
     outline: none;
 }
 
+.form-container-input-invalid {
+    background-color: rgb(255, 205, 205);
+}
+
 .form-buttons {
     display: flex;
     margin-top: 20px;
@@ -73,7 +77,7 @@ button:hover {
     padding: 16px 20px;
 }
 
-.form-buttons #cancel-button {
+#cancel-button {
     background-color: red;
 }
 

@@ -9,7 +9,7 @@ const cancelButton = document.getElementById("cancel-button")
 popupButton.addEventListener("click", showForm)
 window.addEventListener("click", this.closeModalClick)
 cancelButton.addEventListener("click", closeModal)
-submitButton.addEventListener("click", addBookToLibrary)
+submitButton.addEventListener("submit", addBookToLibrary)
 
 //JAVASCRIPT FORM VALIDATION
 const pages = document.querySelector("input[name$='pages']")
@@ -17,8 +17,12 @@ pages.addEventListener("input", (event) => {
   if (pages.validity.rangeOverflow === true) {
     pages.setCustomValidity("Put the real number of pages!");
     pages.reportValidity();
+    pages.classList.add("form-container-input-invalid")
+  } else {
+    pages.setCustomValidity("");
   }
 })
+
 
 class Book {
 
@@ -119,6 +123,28 @@ function resetForm() {
   document.querySelector("input[name$='read']").checked = false
 }
 
+
+// STORAGE TO SAVE THE BOOKS
+
+const saveLocal = () => {
+  sessionStorage.setItem('library', JSON.stringify(myLibrary))
+}
+
+const restoreLocal = () => {
+  const books = JSON.parse(sessionStorage.getItem('library'))
+  if (books) {
+    myLibrary = books.map((book) => JSONToBook(book))
+  } else {
+    myLibrary = []
+  }
+}
+
+const JSONToBook = (book) => {
+  return new Book(book.title, book.author, book.pages, book.read)
+}
+
+
+// INITIALIZATION
 
 myLibrary.push(new Book("The Lord of the Rings","J. R. R. Tolkien", "45235", true))
 myLibrary.push(new Book("Dune","Frank Herbert", "1042", false))
