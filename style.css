@@ -37,7 +37,7 @@ th, td {
     width: 80%;
 }
 
-.form-container input[type=text], .form-container input[type=number] {
+.input-box {
     width: 90%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -45,12 +45,16 @@ th, td {
     background: #f1f1f1;
 }
 
-.form-container input[type=text]:focus, .form-container input[type=number]:focus {
+.input-box:focus {
     background-color: #ddd;
     outline: none;
 }
 
-.form-container-input-invalid {
+.input-box:not(:focus):not(:placeholder-shown):invalid {
+    background-color: rgb(255, 205, 205);
+}
+
+.form-container-input-wrong {
     background-color: rgb(255, 205, 205);
 }
 

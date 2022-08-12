@@ -12,19 +12,31 @@ const read = document.querySelector("input[name$='read']")
 
 popupButton.addEventListener("click", showForm)
 window.addEventListener("click", this.closeModalClick)
-cancelButton.addEventListener("click", closeModal)
+cancelButton.addEventListener("click", cancelModal)
 submitButton.addEventListener("click", addBookToLibrary)
 
 //JAVASCRIPT FORM VALIDATION
+title.addEventListener("input", (event) => {
+  if (title.validity.valid === true) {
+    title.classList.remove("form-container-input-wrong") 
+  }
+})
+author.addEventListener("input", (event) => {
+  if (author.validity.valid === true) {
+    author.classList.remove("form-container-input-wrong") 
+  }
+})
 pages.addEventListener("input", (event) => {
   if (pages.validity.rangeOverflow === true) {
     pages.setCustomValidity("Put the real number of pages!");
-    pages.reportValidity();
-    pages.classList.add("form-container-input-invalid")
+    pages.reportValidity()
   } else {
     pages.setCustomValidity("");
+    pages.classList.remove("form-container-input-wrong") 
   }
 })
+
+
 
 
 //CLASSES
@@ -49,6 +61,7 @@ class Book {
 function addBookToLibrary() {
   if (pages.validity.valid === false || title.validity.valid === false ||
     author.validity.valid === false) {
+      validCheck()
       return
   } 
   let book = new Book(title.value, author.value, pages.value, read.checked)
@@ -123,6 +136,11 @@ function closeModal() {
   //resetForm() //Not needed anymore with submit button
 }
 
+function cancelModal() {
+  modal.style.display = "none";
+  resetForm() 
+}
+
 function closeModalClick(event) {
   if (event.target == modal) {
     modal.style.display = "none";
@@ -136,17 +154,20 @@ function resetForm() {
   document.querySelector("input[name$='read']").checked = false
 }
 
+function validCheck() {
+  if (title.validity.valid === false) title.classList.add("form-container-input-wrong") 
+  if (author.validity.valid === false) author.classList.add("form-container-input-wrong") 
+  if (pages.validity.valid === false) pages.classList.add("form-container-input-wrong")
+}
+
 
 //STORAGE
 
 const saveLocal = () => {
-  console.log(localStorage.getItem('library'))
-  console.log(JSON.stringify(myLibrary))
   localStorage.setItem('library', JSON.stringify(myLibrary))
 }
 
 const restoreLocal = () => {
-  console.log(JSON.parse(localStorage.getItem('library')))
   const books = JSON.parse(localStorage.getItem('library'))
   if (books) {
     myLibrary = books.map((book) => JSONToBook(book))
