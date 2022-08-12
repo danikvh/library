@@ -1,15 +1,20 @@
 let myLibrary = [];
 
-let tbodyRef = document.getElementById("myTable").getElementsByTagName("tbody")[0]
-let popupButton = document.getElementById("popup-button")
-let modal = document.getElementById("myModal")
-let submitButton = document.getElementById("submit-button")
-let cancelButton = document.getElementById("cancel-button")
+const tbodyRef = document.getElementById("myTable").getElementsByTagName("tbody")[0]
+const popupButton = document.getElementById("popup-button")
+const modal = document.getElementById("myModal")
+const submitButton = document.getElementById("submit-button")
+const cancelButton = document.getElementById("cancel-button")
+const pageNumber = document.getElementById("pages")
 
 popupButton.addEventListener("click", showForm)
 window.addEventListener("click", this.closeModalClick)
 cancelButton.addEventListener("click", closeModal)
 submitButton.addEventListener("click", addBookToLibrary)
+pages.addEventListener("input", (event) => {
+  console.log(pages.validty)
+  //if (pages.validity)
+})
 
 class Book {
 
