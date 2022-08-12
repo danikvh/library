@@ -27,7 +27,7 @@ pages.addEventListener("input", (event) => {
 })
 
 
-//CLASSES & METHODS
+//CLASSES
 
 class Book {
 
@@ -43,6 +43,8 @@ class Book {
   }
 }
 
+
+//METHODS BOOK
 
 function addBookToLibrary() {
   if (pages.validity.valid === false || title.validity.valid === false ||
@@ -108,6 +110,9 @@ function changeReadStatus(evt) {
   displayBooks()
 }
 
+
+//METHODS FORM
+
 function showForm() {
   modal.style.display = "block"
 }
@@ -131,14 +136,14 @@ function resetForm() {
 }
 
 
-// STORAGE TO SAVE THE BOOKS
+//STORAGE
 
 const saveLocal = () => {
-  sessionStorage.setItem('library', JSON.stringify(myLibrary))
+  localStorage.setItem('library', JSON.stringify(myLibrary))
 }
 
 const restoreLocal = () => {
-  const books = JSON.parse(sessionStorage.getItem('library'))
+  const books = JSON.parse(localStorage.getItem('library'))
   if (books) {
     myLibrary = books.map((book) => JSONToBook(book))
   } else {
@@ -153,8 +158,5 @@ const JSONToBook = (book) => {
 
 // INITIALIZATION
 
-myLibrary.push(new Book("The Lord of the Rings","J. R. R. Tolkien", "45235", true))
-myLibrary.push(new Book("Dune","Frank Herbert", "1042", false))
-myLibrary.push(new Book("History of Philosophy","Bertrand Russell", "814", true))
 restoreLocal() 
 displayBooks()
