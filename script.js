@@ -5,14 +5,17 @@ const popupButton = document.getElementById("popup-button")
 const modal = document.getElementById("myModal")
 const submitButton = document.getElementById("submit-button")
 const cancelButton = document.getElementById("cancel-button")
+const title = document.querySelector("input[name$='title']")
+const author = document.querySelector("input[name$='author']")
+const pages = document.querySelector("input[name$='pages']")
+const read = document.querySelector("input[name$='read']")
 
 popupButton.addEventListener("click", showForm)
 window.addEventListener("click", this.closeModalClick)
 cancelButton.addEventListener("click", closeModal)
-submitButton.addEventListener("submit", addBookToLibrary)
+submitButton.addEventListener("click", addBookToLibrary)
 
 //JAVASCRIPT FORM VALIDATION
-const pages = document.querySelector("input[name$='pages']")
 pages.addEventListener("input", (event) => {
   if (pages.validity.rangeOverflow === true) {
     pages.setCustomValidity("Put the real number of pages!");
@@ -23,6 +26,8 @@ pages.addEventListener("input", (event) => {
   }
 })
 
+
+//CLASSES & METHODS
 
 class Book {
 
@@ -40,10 +45,10 @@ class Book {
 
 
 function addBookToLibrary() {
-  const title = document.querySelector("input[name$='title']")
-  const author = document.querySelector("input[name$='author']")
-  const pages = document.querySelector("input[name$='pages']")
-  const read = document.querySelector("input[name$='read']")
+  if (pages.validity.valid === false || title.validity.valid === false ||
+    author.validity.valid === false) {
+      return
+  } 
   let book = new Book(title.value, author.value, pages.value, read.checked)
   myLibrary.push(book)
   displayBooks()
@@ -109,7 +114,7 @@ function showForm() {
 
 function closeModal() {
   modal.style.display = "none";
-  resetForm()
+  //resetForm() //Not needed anymore with submit button
 }
 
 function closeModalClick(event) {
