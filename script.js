@@ -5,15 +5,19 @@ const popupButton = document.getElementById("popup-button")
 const modal = document.getElementById("myModal")
 const submitButton = document.getElementById("submit-button")
 const cancelButton = document.getElementById("cancel-button")
-const pageNumber = document.getElementById("pages")
 
 popupButton.addEventListener("click", showForm)
 window.addEventListener("click", this.closeModalClick)
 cancelButton.addEventListener("click", closeModal)
 submitButton.addEventListener("click", addBookToLibrary)
+
+//JAVASCRIPT FORM VALIDATION
+const pages = document.querySelector("input[name$='pages']")
 pages.addEventListener("input", (event) => {
-  console.log(pages.validty)
-  //if (pages.validity)
+  if (pages.validity.rangeOverflow === true) {
+    pages.setCustomValidity("Put the real number of pages!");
+    pages.reportValidity();
+  }
 })
 
 class Book {
