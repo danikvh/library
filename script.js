@@ -48,6 +48,7 @@ function addBookToLibrary() {
   myLibrary.push(book)
   displayBooks()
   closeModal()
+  saveLocal()
 }
 
 function displayBooks() {
@@ -91,6 +92,7 @@ function deleteBook(evt) {
   const title = evt.currentTarget.name
   myLibrary = myLibrary.filter((book) => book.title !== title)
   displayBooks()
+  saveLocal()
 }
 
 function changeReadStatus(evt) {
@@ -149,4 +151,5 @@ const JSONToBook = (book) => {
 myLibrary.push(new Book("The Lord of the Rings","J. R. R. Tolkien", "45235", true))
 myLibrary.push(new Book("Dune","Frank Herbert", "1042", false))
 myLibrary.push(new Book("History of Philosophy","Bertrand Russell", "814", true))
+restoreLocal() 
 displayBooks()
