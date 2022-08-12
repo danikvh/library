@@ -108,6 +108,7 @@ function changeReadStatus(evt) {
   const index = myLibrary.findIndex(book => book.title === chkBox.book.title)
   myLibrary[index] = chkBox.book
   displayBooks()
+  saveLocal()
 }
 
 
@@ -139,10 +140,13 @@ function resetForm() {
 //STORAGE
 
 const saveLocal = () => {
+  console.log(localStorage.getItem('library'))
+  console.log(JSON.stringify(myLibrary))
   localStorage.setItem('library', JSON.stringify(myLibrary))
 }
 
 const restoreLocal = () => {
+  console.log(JSON.parse(localStorage.getItem('library')))
   const books = JSON.parse(localStorage.getItem('library'))
   if (books) {
     myLibrary = books.map((book) => JSONToBook(book))
@@ -152,7 +156,9 @@ const restoreLocal = () => {
 }
 
 const JSONToBook = (book) => {
-  return new Book(book.title, book.author, book.pages, book.read)
+  let read = ""
+  book.read === "Read" ? read = true : read = false
+  return new Book(book.title, book.author, book.pages, read)
 }
 
 
